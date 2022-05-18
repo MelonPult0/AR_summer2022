@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+    <title>3D model</title>
+    <script src="./three.min.js"></script>
+  </head>
+  <body>
+    <script>
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight);
+      const renderer = new THREE.WebGLRenderer({antialias: true});
+      // const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+      camera.position.z = 5;
+
+      // add a cube
+      const geometry1 = new THREE.BoxGeometry(1,1,1);
+      const material1 = new THREE.MeshBasicMaterial({color: 0x0000ff});
+      const cube = new THREE.Mesh(geometry1,material1);
+      scene.add(cube);
+      // add edges
+      const edges1 = new THREE.EdgesGeometry(geometry1);
+      const edges1Material = new THREE.LineBasicMaterial({color: 0x000000})
+      const edges1Mesh = new THREE.LineSegments(edges1, edges1Material);
+      edges1Mesh.position.set(-2, 0, 0);
+      scene.add(edges1Mesh);
+      cube.position.set(-2, 0, 0);
+      function animate1() {
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+        edges1Mesh.rotation.x += 0.01;
+        edges1Mesh.rotation.y += 0.01;
+        // cube.rotation.z += 0.01;
+        renderer.render(scene,camera);
+        requestAnimationFrame(animate1);
+      }
+      animate1();
+
+      // add a cone: parameter: radius, height, radialSegments
+      const geometry2 = new THREE.ConeGeometry(1, 1, 8);
+      const material2 = new THREE.MeshBasicMaterial({color: 0xff0000});
+      const cone = new THREE.Mesh(geometry2,material2);
+      scene.add(cone);
+      // add edges to cone
+      const edges2 = new THREE.EdgesGeometry(geometry2);
+      const edges2Material = new THREE.LineBasicMaterial({color: 0x000000})
+      const edges2Mesh = new THREE.LineSegments(edges2, edges2Material);
+      edges2Mesh.position.set(2, 0, 0);
+      scene.add(edges2Mesh);
+      cone.position.set(2, 0, 0);
+      function animate2(){
+        cone.rotation.x += 0.01;
+        cone.rotation.y += 0.01;
+        edges2Mesh.rotation.x += 0.01;
+        edges2Mesh.rotation.y += 0.01;
+        // cone.rotation.z += 0.01;
+        renderer.render(scene,camera);
+        requestAnimationFrame(animate2);
+      }
+      animate2();
+
+      // customize a polyherdron
+      const verticesOfCube = [
+
+      ]
+
+    </script>
+  </body>
+</html>
